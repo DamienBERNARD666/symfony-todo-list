@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+
+{% block titre %}
+    <a href="/">Retour</a>/Tâches
+{% endblock %}
+
+{% block body %}
+   <div>
+        <a class="btn btn-sm btn-primary edit-project" href=" {{  path('to_do_new')}}">Ajouter</a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tâche</th>
+                <th>Projet</th>
+                <th>Statut</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for to_do in to_dos | sort((a, b) => a.status <=> b.status)%}
+            <tr>
+                <td>{{ to_do.task }}</td>
+                <td>{{ to_do.project }}</td>
+                <td>{{ to_do.status }}</td>
+
+                <td class="d-flex flex-row-reverse">
+                    <a class="btn btn-info btn-sm" href="{{ path('to_do_show', {'id': to_do.id}) }}"><i class="far fa-eye"></i></a>
+                    <a class="btn btn-success btn-sm" href="{{ path('to_do_edit', {'id': to_do.id}) }}"><i class="fas fa-pen"></i></a>
+                    
+                    
+                     {{ include('to_do/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Il n'y a aucune tâche en base de donnée...</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+              {{ knp_pagination_render(to_dos   ) }}   
+               </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('statement') }}
+{% endblock %}
+
+

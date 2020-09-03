@@ -1,0 +1,72 @@
+{% extends "base.html.twig" %}
+
+{% block titre %}
+	Accueil
+{% endblock %}
+
+{% block body %}
+	<div class="panel">
+		<button type="button" class="btn btn-light btn-accueil" onclick="location.href = '/projets';">
+			<i class="far fa-paper-plane"></i><br/>
+			Projets</button>
+		<button type="button" class="btn btn-light btn-accueil" onclick="location.href = '/to/do';">
+			<i class="fas fa-check"></i><br/>
+			Tâches</button>
+		<button type="button" class="btn btn-light btn-accueil" onclick="location.href = '/parametres';">
+			<i class="fas fa-cogs"></i><br/>
+			Statuts</button>
+		<button type="button" class="btn btn-light btn-accueil" onclick="location.href = '/enonce';">
+			<i class="far fa-file-alt"></i><br/>
+			Enoncé</button>
+	</div>
+
+	<div class="accordion pt-2" id="accordionExample">
+		<div class="card">
+			<div class="card-header" id="headingOne">
+				<h2 class="mb-0">
+					<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						Liste des tâches en cours de traitement
+					</button>
+				</h2>
+			</div>
+
+			<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+				<div class="card-body">
+
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Tâche</th>
+								<th>Projet</th>
+								<th>Statut</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for to_do in to_dos %}
+								{% if to_do.status == 'En cours' %}
+									<tr>
+										<td>{{ to_do.task }}</td>
+										<td>{{ to_do.project }}</td>
+										<td>{{ to_do.status }}</td>
+									</tr>
+								{% endif %}
+
+							{% endfor %}
+
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ encore_entry_script_tags('accueil') }}
+{% endblock %}
+

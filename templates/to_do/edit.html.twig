@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ToDo{% endblock %}
+
+{% block body %}
+    <h1 class="lead text-center font-weight-bold">Modification d'une tâche</h1>  
+
+    {{ include('to_do/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <div class="pt-2 d-flex flex-row">
+    
+    <a class="btn btn-info btn-sm" href="{{ path('to_do_index') }}"><i class="fas fa-arrow-left"></i></a>
+
+    {{ include('to_do/_delete_form.html.twig') }}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('statement') }}
+{% endblock %}
