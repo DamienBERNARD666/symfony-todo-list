@@ -22,7 +22,7 @@ class ToDoController extends AbstractController
     public function index(Request $request, PaginatorInterface $paginator): Response
     {
         $donnees = $this->getDoctrine()->getRepository(ToDo::class)->findBy([]);
-
+        //Mise en place de Knp Paginator
         $toDos = $paginator->paginate(
             $donnees,
             $request->query->getInt('page', 1),
